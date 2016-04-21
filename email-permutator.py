@@ -34,27 +34,30 @@ def main(args):
                                 quotechar='"', quoting=csv.QUOTE_MINIMAL)
         domain = args['<TARGET-DOMAIN>']
 
+        unique = set()
         for row in input_file.readlines():
             row = row.strip('\n\r ').lower()
-            employee_data = row.split()
+            if row not in unique:
+                unique.add(row)
+                employee_data = row.split()
 
-            name = employee_data[0]
-            second = employee_data[1]
-            surname = employee_data[-1]
+                name = employee_data[0]
+                second = employee_data[1]
+                surname = employee_data[-1]
 
-            permutations = []
-            permutations.append('%s%s@%s' % (name, surname, domain))
-            permutations.append('%s@%s' % (name, domain))
-            permutations.append('%s.%s@%s' % (name, surname, domain))
-            permutations.append('%s%s@%s' % (name[:1], surname, domain))
-            permutations.append('%s%s@%s' % (name, surname[:1], domain))
-            permutations.append('%s%s@%s' % (name[:1], surname[:1], domain))
-            if second:
-                permutations.append('%s%s%s@%s' % (name[:1], second[:1], surname, domain))
+                permutations = []
+                permutations.append('%s%s@%s' % (name, surname, domain))
+                permutations.append('%s@%s' % (name, domain))
+                permutations.append('%s.%s@%s' % (name, surname, domain))
+                permutations.append('%s%s@%s' % (name[:1], surname, domain))
+                permutations.append('%s%s@%s' % (name, surname[:1], domain))
+                permutations.append('%s%s@%s' % (name[:1], surname[:1], domain))
+                if second:
+                    permutations.append('%s%s%s@%s' % (name[:1], second[:1], surname, domain))
 
-            for address in permutations:
-                print address
-                writer.writerow([address, name.capitalize(), second.capitalize()])
+                for address in permutations:
+                    print address
+                    writer.writerow([address, name.capitalize(), second.capitalize()])
 
     except Exception, e:
         print e
