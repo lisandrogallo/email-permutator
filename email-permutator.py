@@ -2,14 +2,13 @@
 
 """
  Usage:
-     email-permutator.py [options] <INPUT-FILE>
+     email-permutator.py <TARGET-DOMAIN> <INPUT-FILE>
      email-permutator.py -h | --help
      email-permutator.py --version
 
  Options:
      -h --help              Show this screen
      --version              Show version
-     -d --domain=<DOMAIN>   Target domain
 """
 
 from docopt import docopt
@@ -33,7 +32,7 @@ def main(args):
         )
         writer = csv.writer(csv_file, delimiter=',',
                                 quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        domain = args['--domain']
+        domain = args['<TARGET-DOMAIN>']
 
         for row in input_file.readlines():
             row = row.strip('\n\r ').lower()
