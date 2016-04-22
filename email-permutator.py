@@ -39,7 +39,7 @@ def main(args):
             row = row.strip('\n\r ').lower()
             if row not in unique:
                 unique.add(row)
-                employee_data = row.split()
+                employee_data = row.split(' ')
 
                 name = employee_data[0]
                 second = employee_data[1]
@@ -52,7 +52,7 @@ def main(args):
                 permutations.append('%s%s@%s' % (name[:1], surname, domain))
                 permutations.append('%s%s@%s' % (name, surname[:1], domain))
                 permutations.append('%s%s@%s' % (name[:1], surname[:1], domain))
-                if second:
+                if second != surname:
                     permutations.append('%s%s%s@%s' % (name[:1], second[:1], surname, domain))
 
                 for address in permutations:
