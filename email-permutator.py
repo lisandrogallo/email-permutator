@@ -2,7 +2,7 @@
 
 """
  Usage:
-     email-permutator.py <TARGET-DOMAIN> <INPUT-FILE>
+     email-permutator.py <COMPANY> <DOMAIN> <INPUT-FILE>
      email-permutator.py -h | --help
      email-permutator.py --version
 
@@ -32,9 +32,12 @@ def main(args):
         )
         writer = csv.writer(csv_file, delimiter=',',
                                 quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        domain = args['<TARGET-DOMAIN>']
+        domain = args['<DOMAIN>']
+
+        writer.writerow(['First Name', 'Last Name', 'Position', 'Email', 'Company'])
 
         unique = set()
+
         for row in input_file.readlines():
             row = row.strip('\n\r ').lower()
             if row not in unique:
@@ -57,7 +60,7 @@ def main(args):
 
                 for address in permutations:
                     print address
-                    writer.writerow([address, name.capitalize(), second.capitalize()])
+                    writer.writerow([name.capitalize(), second.capitalize(), None, address, args['<COMPANY>']])
 
     except Exception, e:
         print e
