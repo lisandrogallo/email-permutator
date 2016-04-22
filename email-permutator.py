@@ -60,7 +60,7 @@ def main(args):
 
                 for address in permutations:
                     print address
-                    writer.writerow([name.capitalize(), second.capitalize(), None, address, args['<COMPANY>']])
+                    writer.writerow([name.capitalize(), surname.capitalize(), None, address, args['<COMPANY>']])
 
     except Exception, e:
         print e
