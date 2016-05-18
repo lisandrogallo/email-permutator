@@ -1,4 +1,4 @@
-*.txt
+input.txt
 *.csv
 
 # Byte-compiled / optimized / DLL files
